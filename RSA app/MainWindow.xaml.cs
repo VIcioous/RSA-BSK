@@ -29,7 +29,8 @@ namespace RSA_app
         {
             for (int i = 2; i <= (num / 2); i++)
             {
-                if (num % i == 0) return false;
+                if (num % i == 0) 
+                    return false;
             }
             return true;
 
@@ -68,9 +69,9 @@ namespace RSA_app
         private void CipherText(object sender, RoutedEventArgs e) //obsługa przycisku szyfrującego
         {
             string msg = MessageInput.Text;
-            char[] oMSG = msg.ToCharArray(0, msg.Length); //przerobienie na tablice  charów aby łatwiej przerobić na ASCII
-            p = Convert.ToInt32(pInput.Text); //konwersja liczb
-            q = Convert.ToInt32(qInput.Text);
+            char[] oMSG = msg.ToCharArray(0, msg.Length); //przerobienie na tablice charów aby łatwiej przerobić na ASCII
+            int.TryParse(pInput.Text, out p); // konwersja liczb
+            int.TryParse(qInput.Text, out q);
 
             isPrime = checkPrime(p); //sprawdzenie czy są liczbami pierwszymi
             isPrime = checkPrime(q);
@@ -84,7 +85,6 @@ namespace RSA_app
             yText.Text = y.ToString();
             eText.Text = en.ToString();
             dText.Text = d.ToString();
-            MessText.Text = msg;
 
             for (int a = 0; a < msg.Length; a++) //szyfrowanie wiadomości
             {
@@ -100,14 +100,13 @@ namespace RSA_app
             }
             emsg = new string(oMSG); //konwersja tablicy na stringa
             finalTextbox.Text = emsg; //wyświetlenie wiadomości
-
         }
         private void DecipherText(object sender, RoutedEventArgs e)
         {
             string msg = MessageInput.Text;
             char[] oMSG = msg.ToCharArray(0, msg.Length);
-            p = Convert.ToInt32(pInput.Text);
-            q = Convert.ToInt32(qInput.Text);
+            int.TryParse(pInput.Text, out p);
+            int.TryParse(qInput.Text, out q);
 
             isPrime = checkPrime(p);
             isPrime = checkPrime(q);
@@ -121,8 +120,6 @@ namespace RSA_app
             yText.Text = y.ToString();
             eText.Text = en.ToString();
             dText.Text = d.ToString();
-            MessText.Text = msg;
-
 
             for (long a = 0; a < msg.Length; a++)
             {
@@ -138,12 +135,6 @@ namespace RSA_app
             }
             emsg = new string(oMSG);
             finalTextbox.Text = emsg;
-
         }
-
-
     }
-
-
-
 }
