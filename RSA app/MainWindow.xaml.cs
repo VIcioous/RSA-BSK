@@ -68,6 +68,7 @@ namespace RSA_app
         } //d, gdzie jej różnica z odwrotnością modularną liczby e jest podzielna przez φ(n)
         private void CipherText(object sender, RoutedEventArgs e) //obsługa przycisku szyfrującego
         {
+            string cipher="";
             string msg = MessageInput.Text;
             char[] oMSG = msg.ToCharArray(0, msg.Length); //przerobienie na tablice charów aby łatwiej przerobić na ASCII
             int.TryParse(pInput.Text, out p); // konwersja liczb
@@ -96,15 +97,17 @@ namespace RSA_app
                     k = k % n;
                 }
                 c = (int)k;
-                oMSG[a] = (char)c; //zamiana z Ascii na litere
+                cipher += c.ToString() + " "; //bindowanie tekstu
             }
-            emsg = new string(oMSG); //konwersja tablicy na stringa
-            finalTextbox.Text = emsg; //wyświetlenie wiadomości
+
+            finalTextbox.Text = cipher; //wyświetlenie wiadomości
         }
-        private void DecipherText(object sender, RoutedEventArgs e)
+        private void DecipherText(object sender, RoutedEventArgs e) //deszyfracja
         {
+            string decipher="";
             string msg = MessageInput.Text;
-            char[] oMSG = msg.ToCharArray(0, msg.Length);
+            string[] tab = msg.Split(" "); //dzielenie na tablicę z separatorem spacji
+   
             int.TryParse(pInput.Text, out p);
             int.TryParse(qInput.Text, out q);
 
@@ -121,9 +124,9 @@ namespace RSA_app
             eText.Text = en.ToString();
             dText.Text = d.ToString();
 
-            for (long a = 0; a < msg.Length; a++)
+            for (long a = 0; a < tab.Length; a++)
             {
-                m = oMSG[a];
+                int.TryParse(tab[a],out m); //przetworzenie na liczbę
                 long k = 1;
                 for (int i = 0; i < d; i++)
                 {
@@ -131,10 +134,10 @@ namespace RSA_app
                     k = k % n;
                 }
                 c = (int)k;
-                oMSG[a] = (char)c;
+                decipher += (char)c; //a tutaj szybkie przetworzenie na tekst
             }
-            emsg = new string(oMSG);
-            finalTextbox.Text = emsg;
+
+            finalTextbox.Text = decipher;
         }
     }
 }

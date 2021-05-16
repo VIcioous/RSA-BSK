@@ -29,7 +29,7 @@
                 <Label Grid.Row="2" Margin="5">Wiadomość</Label>
                 <TextBox Name="pInput" Grid.Column="1" Margin="5" Padding="5"/>
                 <TextBox Name="qInput" Grid.Row="1" Grid.Column="1" Margin="5" Padding="5"/>
-                <TextBox Name="MessageInput" Grid.Row="2" Grid.Column="1" Margin="5" Padding="5"/>
+                <TextBox Name="MessageInput" Grid.Row="2" Grid.Column="1" Margin="5" Padding="5" Height="60"/>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1" Header="Akcje">
