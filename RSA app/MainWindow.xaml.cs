@@ -19,7 +19,6 @@ namespace RSA_app
     public partial class MainWindow : Window
     {
         int y, n, p, q, en, d, m, c, flag;
-        string emsg;
         bool isPrime = true;
         public MainWindow()
         {
@@ -74,6 +73,8 @@ namespace RSA_app
             int.TryParse(pInput.Text, out p); // konwersja liczb
             int.TryParse(qInput.Text, out q);
 
+            StringBuilder intMessage = new();
+
             isPrime = checkPrime(p); //sprawdzenie czy są liczbami pierwszymi
             isPrime = checkPrime(q);
             n = p * q; //liczenie n
@@ -97,17 +98,22 @@ namespace RSA_app
                     k = k % n;
                 }
                 c = (int)k;
-                cipher += c.ToString() + " "; //bindowanie tekstu
+                cipher += (char)c; //bindowanie tekstu
+                intMessage.Append(c);
+                intMessage.Append(" ");
             }
 
             finalTextbox.Text = cipher; //wyświetlenie wiadomości
+            finalNumberTextbox.Text = intMessage.ToString();
         }
         private void DecipherText(object sender, RoutedEventArgs e) //deszyfracja
         {
             string decipher="";
             string msg = MessageInput.Text;
             string[] tab = msg.Split(" "); //dzielenie na tablicę z separatorem spacji
-   
+
+            StringBuilder intMessage = new();
+
             int.TryParse(pInput.Text, out p);
             int.TryParse(qInput.Text, out q);
 
@@ -135,9 +141,12 @@ namespace RSA_app
                 }
                 c = (int)k;
                 decipher += (char)c; //a tutaj szybkie przetworzenie na tekst
+                intMessage.Append(c);
+                intMessage.Append(" ");
             }
 
             finalTextbox.Text = decipher;
+            finalNumberTextbox.Text = intMessage.ToString();
         }
     }
 }
