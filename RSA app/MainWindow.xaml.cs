@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace RSA_app
 {
@@ -24,6 +12,7 @@ namespace RSA_app
         {
             InitializeComponent();
         }
+        //sprawdzenie czy liczby są pierwsze
         bool checkPrime(int num)
         {
             for (int i = 2; i <= (num / 2); i++)
@@ -33,7 +22,8 @@ namespace RSA_app
             }
             return true;
 
-        } //sprawdzenie czy liczby są pierwsze
+        }
+        //liczenie liczby względnie pierwszej z tocjenta ((p-1)*(q-1)) od n
         void calculateE()
         {
             for (int j = 2; j < y; j++)
@@ -52,7 +42,8 @@ namespace RSA_app
                     }
                 }
             }
-        } //liczenie liczby względnie pierwszej z tocjenta od n
+        }
+        //d, gdzie jej różnica z odwrotnością modularną liczby e jest podzielna przez φ(n)
         int calculateD(int e)
         {
             int k = 1;
@@ -64,7 +55,7 @@ namespace RSA_app
                     return k / e;
                 }
             }
-        } //d, gdzie jej różnica z odwrotnością modularną liczby e jest podzielna przez φ(n)
+        } 
         private void CipherText(object sender, RoutedEventArgs e) //obsługa przycisku szyfrującego
         {
             string cipher="";
